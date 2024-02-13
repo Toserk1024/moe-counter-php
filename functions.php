@@ -55,7 +55,7 @@ function tool_data($all_data, $id, $length, $file) {
             $full = $full . '9';
             $i++;
         }
-        if ($all_data[$id] > (int)$full) {
+        if ($all_data[$id] >= (int)$full) {
             $all_data[$id] = 0;
         } 
     } else {
