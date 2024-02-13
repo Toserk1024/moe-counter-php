@@ -11,7 +11,7 @@ $theme = check_data($id, $theme, $default_theme);
 $all_data = tool_data(json_decode($json_data, true), $id, $length, $data_file);
 $display_data = tool_display_data($all_data[$id], $length);
 
-$theme_path = "theme/{$theme}/";
+$theme_path = "theme/{$theme}/"; //主题文件路径
 $x_data = image_x($theme, $length);
 $y = image_y($theme);
 $image = image_content($x_data, $y, $length, $theme_path, $display_data);

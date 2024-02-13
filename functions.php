@@ -3,6 +3,7 @@ $theme_all = ['asoul', 'moebooru', 'moebooru-h', 'rule34', 'gelbooru', 'gelbooru
 $theme_small = ['asoul', 'moebooru', 'moebooru-h', 'rule34'];
 $theme_big = ['gelbooru', 'gelbooru-h'];
 
+//配置检测函数（如数据文件缺失，将会自动创建）
 function check_config($length, $data_file) {
     if ($length <= '1') {
         echo "Error:计数器位数不能小于2<br>当前值：{$length}";
@@ -23,6 +24,7 @@ function check_config($length, $data_file) {
     }
 }
 
+//输入数据检测函数(准备加入安全措施)
 function check_data($id, $theme, $default_theme) {
     global $theme_all;
     if($id == '') {
@@ -37,8 +39,10 @@ function check_data($id, $theme, $default_theme) {
 return $theme;
 }
 
+//数据自增/处理/保存函数
 function tool_data($all_data, $id, $length, $file) {
     if (isset($all_data[$id])) {
+        //避免数值溢出，造成错误
         $i = 0; $full = '';
         while ($i < $length) {
             $full = $full . '9';
@@ -50,34 +54,40 @@ function tool_data($all_data, $id, $length, $file) {
     } else {
         $all_data[$id] = 0;
     }
+//自增数据后保存并返回数据
 $all_data[$id]++;
 $json_data = json_encode($all_data);
 file_put_contents($file, $json_data);
 return $all_data;
 }
 
+//显示数据计算函数
 function tool_display_data($data, $length) {
     $data = (string)$data;
     $data_length = strlen($data);
     while ($data_length < $length) {
+        //用0补全数据
         $data = '0' . $data;
         $data_length = strlen($data);
     }
+//将数据分割成数组
 $display_data = str_split($data);
 return $display_data;
 }
 
+//x坐标位置计算函数
 function x_count($x, $length) {
      $i = 0;
      $data = array();
      while ($i <= $length) {
          $x_data = $i*$x;
-         $data[$i] = (string)$x_data;
+         $data[$i] = $x_data;
          $i++;
      }
 return $data;
 }
 
+//图像x坐标判断函数
 function image_x($theme, $length) {
     global $theme_small;
     global $theme_big;
@@ -89,6 +99,7 @@ function image_x($theme, $length) {
 return $data;
 }
 
+//图像y坐标判断函数
 function image_y($theme) {
     global $theme_small;
     global $theme_big;
@@ -100,6 +111,7 @@ function image_y($theme) {
 return $y;
 }
 
+//图像输出拼接函数
 function image_content($x_data, $y, $length, $theme_path, $display_data) {
     $i = 0; $data = '';
     while ($i < $length) {
