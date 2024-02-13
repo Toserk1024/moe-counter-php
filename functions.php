@@ -1,7 +1,8 @@
 <?php
-$theme_all = ['asoul', 'moebooru', 'moebooru-h', 'rule34', 'gelbooru', 'gelbooru-h'];
-$theme_small = ['asoul', 'moebooru', 'moebooru-h', 'rule34'];
+//主题分类处理
 $theme_big = ['gelbooru', 'gelbooru-h'];
+$theme_small = ['asoul', 'moebooru', 'moebooru-h', 'rule34'];
+$theme_all = ['asoul', 'moebooru', 'moebooru-h', 'rule34', 'gelbooru', 'gelbooru-h'];
 
 //配置检测函数（如数据文件缺失，将会自动创建）
 function check_config($length, $data_file) {
@@ -24,13 +25,19 @@ function check_config($length, $data_file) {
     }
 }
 
-//输入数据检测函数(准备加入安全措施)
-function check_data($id, $theme, $default_theme) {
+//输入数据检测函数(控制id长度及类型，保证安全)
+function check_data($id, $theme, $default_theme, $id_max) {
     global $theme_all;
     if($id == '') {
         echo '请输入统计id';
         exit;
-    } elseif ($theme == '') {
+    } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $id)) {
+        echo '因安全原因，统计id目前只支持字母和数字';
+        exit;
+    } elseif (!stlen($id) <= $id_max) {
+        echo "对不起，您当前id超过最大长度限制：{$id_max}<br>当前长度{stlen($id)}";
+        exit;
+    }elseif ($theme == '') {
         $theme = $default_theme;
     } elseif (!in_array($theme, $theme_all)) {
         echo "请输入有效的主题 当前值：{$theme}";
