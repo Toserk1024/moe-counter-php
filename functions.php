@@ -26,7 +26,7 @@ function check_config($length, $data_file) {
 }
 
 //输入数据检测函数(控制id长度及类型，保证安全)
-function check_data($id, $theme, $default_theme, $id_max) {
+function check_data($id, $theme, $default_theme, $id_min, $id_max) {
     global $theme_all;
     if($id == '') {
         echo '请输入统计id';
@@ -34,8 +34,8 @@ function check_data($id, $theme, $default_theme, $id_max) {
     } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $id)) {
         echo '因安全原因，统计id目前只支持字母和数字';
         exit;
-    } elseif (strlen($id) > $id_max) {
-        echo "对不起，您当前id超过最大长度限制：{$id_max}";
+    } elseif ($id_min > strlen($id) || strlen($id) > $id_max) {
+        echo "对不起，您当前id在长度限制之外：{$id_min}~{$id_max}";
         exit;
     }elseif ($theme == '') {
         $theme = $default_theme;
@@ -55,7 +55,7 @@ function tool_data($all_data, $id, $length, $file) {
             $full = $full . '9';
             $i++;
         }
-        if ($all_data[$id] == (int)$full) {
+        if ($all_data[$id] > (int)$full) {
             $all_data[$id] = 0;
         } 
     } else {
