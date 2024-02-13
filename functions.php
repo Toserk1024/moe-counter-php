@@ -35,7 +35,7 @@ function check_data($id, $theme, $default_theme, $id_max) {
         echo '因安全原因，统计id目前只支持字母和数字';
         exit;
     } elseif (strlen($id) > $id_max) {
-        echo "对不起，您当前id超过最大长度限制：{$id_max}<br>当前长度{stlen($id)}";
+        echo "对不起，您当前id超过最大长度限制：{$id_max}";
         exit;
     }elseif ($theme == '') {
         $theme = $default_theme;

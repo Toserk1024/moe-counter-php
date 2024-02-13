@@ -1,6 +1,6 @@
 <?php
 $length = 6; //设定计数器显示位数
-$id_max = 9, //计数id的最大长度
+$id_max = 9; //计数id的最大长度
 $data_file = 'data.json'; //数据文件路径
 $default_theme = 'rule34'; //未指定时的默认主题
 
