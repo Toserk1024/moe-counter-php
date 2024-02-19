@@ -1,4 +1,8 @@
 <?php
+//输入数据获取
+$id = @$_REQUEST['id'];
+$theme = @$_REQUEST['theme'];
+
 //主题分类处理
 $theme_big = ['gelbooru', 'gelbooru-h'];
 $theme_small = ['asoul', 'moebooru', 'moebooru-h', 'rule34'];
@@ -119,8 +123,8 @@ return $y;
 }
 
 //图像输出拼接函数
-function image_content($x_data, $y, $length, $theme_path, $display_data) {
-    $i = 0; $data = '';
+function image_content($x_data, $y, $length, $theme, $theme_path, $display_data) {
+    $i = 0; $data = ''; $theme_path = "{$theme_path}/{$theme}/";
     while ($i < $length) {
         $image_path = $theme_path . $display_data[$i] . '.gif';
         $base_image = base64_encode(file_get_contents($image_path));
