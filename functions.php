@@ -132,8 +132,9 @@ function image_content($x_data, $y, $length, $theme, $theme_path, $display_data)
         $data = $data . $image_data;
         $i++;
     }
+    header('Content-Type: image/svg+xml');
     $image_head = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><svg width=\"{$x_data[$length]}\" height=\"{$y}\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><g>\n";
-    $data = $image_head . $data;
+    $data = $image_head . $data . '</g></svg>';
 return $data;
 }
 ?>
