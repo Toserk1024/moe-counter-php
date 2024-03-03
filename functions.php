@@ -4,9 +4,9 @@ $id = @$_REQUEST['id'];
 $theme = @$_REQUEST['theme'];
 
 //主题分类处理
-$theme_big = ['gelbooru', 'gelbooru-h'];
-$theme_small = ['asoul', 'moebooru', 'moebooru-h', 'rule34'];
-$theme_all = ['asoul', 'moebooru', 'moebooru-h', 'rule34', 'gelbooru', 'gelbooru-h'];
+$theme_big = ['gelbooru'];
+$theme_small = ['asoul', 'moebooru', 'rule34'];
+$theme_all = ['asoul', 'moebooru', 'rule34', 'gelbooru'];
 
 //配置检测函数（如数据文件缺失，将会自动创建）
 function check_config($length, $data_file) {
