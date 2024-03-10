@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <td>theme</td>
-    <td>asoul / moebooru / moebooru-h / rule34 / gelbooru / gelbooru-h</td>
+    <td>asoul / moebooru / rule34 / gelbooru</td>
   </tr>
 </table>
 例子：index.php?id=123456&theme=rule34
