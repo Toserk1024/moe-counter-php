@@ -30,8 +30,8 @@ function check_config($length, $data_file) {
 }
 
 //输入数据检测函数(控制id长度及类型，保证安全)
-function check_data($id, $theme, $default_theme, $id_min, $id_max) {
-    global $theme_all;
+function check_data($id, $theme) {
+    global $theme_all, $default_theme, $id_min, $id_max;
     if($id == '') {
         echo '请输入统计id';
         exit;
@@ -51,7 +51,8 @@ return $theme;
 }
 
 //数据自增/处理/保存函数
-function tool_data($all_data, $id, $length, $file) {
+function tool_data($all_data, $id) {
+    global $length, $data_file;
     if (isset($all_data[$id])) {
         //避免数值溢出，造成错误
         $i = 0; $full = '';
@@ -68,7 +69,7 @@ function tool_data($all_data, $id, $length, $file) {
 //自增数据后保存并返回数据
 $all_data[$id]++;
 $json_data = json_encode($all_data);
-file_put_contents($file, $json_data);
+file_put_contents($data_file, $json_data);
 return $all_data;
 }
 
@@ -100,8 +101,7 @@ return $data;
 
 //图像x坐标判断函数
 function image_x($theme, $length) {
-    global $theme_small;
-    global $theme_big;
+    global $theme_small, $theme_big;
     if (in_array($theme, $theme_small)) {
         $data = x_count(45, $length);
     } elseif (in_array($theme, $theme_big)) {
@@ -112,8 +112,7 @@ return $data;
 
 //图像y坐标判断函数
 function image_y($theme) {
-    global $theme_small;
-    global $theme_big;
+    global $theme_small, $theme_big;
     if (in_array($theme, $theme_small)) {
         $y = 100;
     } elseif (in_array($theme, $theme_big)) {
@@ -123,7 +122,8 @@ return $y;
 }
 
 //图像输出拼接函数
-function image_content($x_data, $y, $length, $theme, $theme_path, $display_data) {
+function image($x_data, $y, $theme, $display_data) {
+    global $length, $theme_path;
     $i = 0; $data = ''; $theme_path = "{$theme_path}/{$theme}/";
     while ($i < $length) {
         $image_path = $theme_path . $display_data[$i] . '.gif';
