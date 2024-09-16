@@ -1,8 +1,9 @@
 ### 一.关于本项目
 本项目基于[Moe-Counter](https://github.com/journey-ad/Moe-Counter)进行重构<br>
-采用<strong>PHP+JSON</strong>的方式运行<br><br>
+支持**JSON/SQLite及MySQL**的储存方式<br><br>
 TO DO List：
-- [ ] 多方式储存数据(sqlite, mysql)
+- [x] ~~1. 多方式储存数据(sqlite, mysql)~~**Done**
+- [ ] 2. 制作一个默认的Demo主页
 ### 二.使用方法
 <table>
   <tr>
@@ -18,10 +19,12 @@ TO DO List：
     <td>asoul / moebooru / rule34 / gelbooru</td>
   </tr>
 </table>
-例子：index.php?id=123456&theme=rule34<br>
-您可以使用nginx或apache进行自定义重写url
+
+1. 例子：index.php?id=123456&theme=rule34
+2. 您可以使用nginx或apache进行重写url
+3. 部署时请注意将themes文件夹一同下载下来，主题路径可以在配置里修改
 
 ### 三.注意事项
-1. 为保证数据安全，请在第一次运行前更改数据文件的路径或者名称，或使用防火墙保护数据文件。<br>
-2. 为避免特殊字符而导致json结构破坏，计数ID默认只允许使用字母+数字，您可自行修改配置中的表达式<br>
+1. 使用前请修改文件中的数据库配置，并合理使用防火墙保护您的数据文件<br>
+2. 保证您的安全，计数ID默认只允许使用字母+数字，您可自行修改配置中的正则表达式<br>
 3. 计数器位数应避免设置过小，当计数值大于当前位数所允许的最大值时，计数值将自动归零，保证程序正常运行。
